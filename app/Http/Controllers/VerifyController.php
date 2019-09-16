@@ -14,4 +14,8 @@ class VerifyController extends Controller
     	$data = PermissionData::all();
         return view('admins.verify')->with(['permissionData' => $data]);
     }
+
+    public function destroy($id) {
+		// todo Continue
+	}
 }

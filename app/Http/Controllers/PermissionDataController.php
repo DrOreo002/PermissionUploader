@@ -30,7 +30,7 @@ class PermissionDataController extends Controller
      	return view('upload_permission');
     }
 
-    public function index_verify() {
-
+	public function index_view() {
+		return view('admins.view');
 	}
 }
