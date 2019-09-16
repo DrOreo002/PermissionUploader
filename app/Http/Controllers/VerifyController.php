@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\PermissionData;
 
 class VerifyController extends Controller 
 {
-
     public function __construct() {
         $this->middleware('auth');
     }
 
     public function index() {
-        return view('admins.verify');
+    	$data = PermissionData::all();
+        return view('admins.verify')->with(['permissionData' => $data]);
     }
 }

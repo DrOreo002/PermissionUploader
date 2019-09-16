@@ -18,6 +18,7 @@ class CreatePermissionsDataTable extends Migration
             $table->string('file_name');
             $table->string('submitted_by');
             $table->timestamp('created_at')->nullable();
+			$table->timestamp('updated_at')->nullable();
         });
     }
 

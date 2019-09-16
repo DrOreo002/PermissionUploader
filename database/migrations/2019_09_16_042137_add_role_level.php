@@ -14,7 +14,7 @@ class AddRoleLevel extends Migration
     public function up()
     {
         Schema::table('users', function($table) {
-            $table->integer('roleLvl');
+            $table->integer('roleLvl')->default(0);
         });
     }
 

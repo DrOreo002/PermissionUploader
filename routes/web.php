@@ -11,14 +11,19 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/upload', 'PermissionDataController@index_upload');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/verify', 'VerifyController@index');
+
+Route::prefix('upload')->group(function() {
+	Route::post('/submit', 'PermissionDataController@submit')->name('submit_data');
+	Route::get('/submit', 'PermissionDataController@index_upload');
+});
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::prefix('home')->group(function () {
-    Route::get('/verify', 'VerifyController@index');
-});
