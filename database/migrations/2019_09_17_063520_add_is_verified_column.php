@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRoleLevel extends Migration
+class AddIsVerifiedColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class AddRoleLevel extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('users', 'roleLvl')) {
-            Schema::table('users', function($table) {
-                $table->integer('roleLvl')->default(0);
-            });   
-        }
+        Schema::table('permissions_data', function (Blueprint $table) {
+            $table->boolean('verified')->nullable()->default(false);
+        });
     }
 
     /**
@@ -27,8 +25,8 @@ class AddRoleLevel extends Migration
      */
     public function down()
     {
-        Schema::table('users', function($table) {
-            $table->dropColumn('roleLvl');
+        Schema::table('permissions_data', function (Blueprint $table) {
+            $table->dropColumn('verified');
         });
     }
 }

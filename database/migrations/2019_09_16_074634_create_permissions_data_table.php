@@ -13,13 +13,15 @@ class CreatePermissionsDataTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions_data', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('file_name');
-            $table->string('submitted_by');
-            $table->timestamp('created_at')->nullable();
-			$table->timestamp('updated_at')->nullable();
-        });
+        if (!Schema::hasTable('permissions_data')) {
+            Schema::create('permissions_data', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('file_name');
+                $table->string('submitted_by');
+                $table->timestamp('created_at')->nullable();
+                $table->timestamp('updated_at')->nullable();
+            });   
+        }
     }
 
     /**

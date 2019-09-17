@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h1 class="mb-0">Upload your permission</h1>
-                        <p class="text-muted">There's no maximum size atm. You can upload any size of text</p>
+                        <p class="text-muted">We only accept text based file</p>
                         <hr>
 
                         @if(count($errors) > 0)
@@ -18,9 +18,15 @@
                             </div>
                         @endif
 
-                        @if(session()->has('message'))
+                        @if(session()->has('error'))
+                            <div class="alert alert-danger">
+                                {{ session()->get('error') }}
+                            </div>
+                        @endif
+
+                        @if(session()->has('success'))
                             <div class="alert alert-success">
-                                {{ session()->get('message') }}
+                                {{ session()->get('success') }}
                             </div>
                         @endif
 
