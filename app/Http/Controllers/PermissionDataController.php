@@ -12,12 +12,12 @@ class PermissionDataController extends Controller
 		$this->middleware('auth');
 	}
 
-    public function submit(Request $request) {
-		$this->validate($request, [
-			'select_file' => 'required'
-		]);
-
+    public function submit(UploadPermissionData $request) {
+		$validated = $request->validated();
 		$file = $request->file('select_file');
+		if (filesize($file) == 0) {
+			$request->redi
+		}
 		$permissionData = new PermissionData();
 		$permissionData->file_name = $file->getClientOriginalName();
 		$permissionData->submitted_by = Auth::user()->name;
