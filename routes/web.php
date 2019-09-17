@@ -32,9 +32,7 @@ Route::post('/verify/{id}', function ($id) {
 	return 'Verifying ' . $id;
 })->name('accept_permission_data');
 
-Route::delete('/verify/{id}', function ($id) {
-	return 'Deleting ' . $id;
-})->name('delete_permission_data');
+Route::delete('/verify/{id}', 'VerifyController@destroy')->name('delete_permission_data');
 
 /*
  * Uploading things

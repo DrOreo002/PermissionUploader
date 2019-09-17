@@ -16,6 +16,10 @@ class VerifyController extends Controller
     }
 
     public function destroy($id) {
-		// todo Continue
+        $data = PermissionData::find($id);
+        $data->delete();
+
+        $resultData = PermissionData::all();
+        return redirect()->back()->with(['permissionData' => $resultData]);
 	}
 }
