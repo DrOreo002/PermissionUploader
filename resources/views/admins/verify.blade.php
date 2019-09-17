@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">List of Unverified Uploads</div>
                     <div class="card-body">
@@ -14,6 +14,7 @@
                                     <th>File Name</th>
                                     <th>Submitted By</th>
                                     <th>Date Submitted</th>
+                                    <th>File Path</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -27,6 +28,7 @@
                                                 <td>{{ $pData->file_name }}</td>
                                                 <td>{{ $pData->submitted_by }}</td>
                                                 <td>{{ $pData->created_at }}</td>
+                                                <td>{{ $pData->file_path }}</td>
                                                 <td>
                                                     {{-- Delete --}}
                                                     <form action="{{ URL::route('delete_permission_data', $pData->id) }}" method="POST" style="display: inline;">
