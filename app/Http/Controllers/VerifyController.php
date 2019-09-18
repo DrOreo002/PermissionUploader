@@ -32,4 +32,22 @@ class VerifyController extends Controller
         $resultData = PermissionData::all();
         return redirect()->back()->with(['permissionData' => $resultData]);
 	}
+
+    /**
+     * Verify the data
+     *
+     * @param $id The data id
+     * @return \Illuminate\Http\RedirectResponse a response?
+     */
+	public function verify($id) {
+        $data = PermissionData::find($id);
+        $data->verified = true;
+        $data->save();
+
+        $resultData = PermissionData::all();
+        return redirect()->back()->with([
+            'permissionData' => $resultData,
+            'message' => 'Data verified successfully!'
+        ]);
+    }
 }

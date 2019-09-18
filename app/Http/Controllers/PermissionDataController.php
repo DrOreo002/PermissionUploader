@@ -12,10 +12,7 @@ class PermissionDataController extends Controller
 	} 
 
     public function submit(Request $request) {
-		$request->validate(
-            ['select_file' => 'required|mimes:txt'] // Will also detect empty .txt file as a null or not a .txt file
-        );
-
+	    $this->validate($request, ['select_file' => 'required|mimes:txt']); // Will also detect empty .txt file as a null or not a .txt file
 		$file = $request->file('select_file');
 		$path = $file->store('permission_data');
 
@@ -32,7 +29,20 @@ class PermissionDataController extends Controller
      	return view('upload_permission');
     }
 
-	public function index_view() {
-		return view('admins.view');
+	public function index_view($id) {
+	    $pData = PermissionData::find($id);
+	    if (!$pData->exists) {
+	        return view('admins.view')->with([
+	            'message', 'Cannot find the data!'
+            ]);
+        }
+		return view('admins.view')->with([
+		    'pData' => $pData
+        ]);
 	}
+
+	public function index_list() {
+	    $permissionData = PermissionData::all();
+	    return view('admins.list')->with('permissionData', $permissionData);
+    }
 }

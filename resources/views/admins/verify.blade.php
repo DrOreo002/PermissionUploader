@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="container">
+        @if(session()->has('message'))
+            <div class="alert alert-info">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -23,32 +29,34 @@
                                 @if(isset($permissionData))
                                     @if(count($permissionData) > 0)
                                         @foreach($permissionData as $pData)
-                                            <tr>
-                                                <th scope="row">{{ $pData->id }}</th>
-                                                <td>{{ $pData->file_name }}</td>
-                                                <td>{{ $pData->submitted_by }}</td>
-                                                <td>{{ $pData->created_at }}</td>
-                                                <td>{{ $pData->file_path }}</td>
-                                                <td>
-                                                    {{-- Delete --}}
-                                                    <form action="{{ URL::route('delete_permission_data', $pData->id) }}" method="POST" style="display: inline;">
-                                                        @csrf
-                                                        <input type="hidden" name="_method" value="DELETE">
-                                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
-                                                    </form>
+                                            @if(!$pData->verified)
+                                                <tr>
+                                                    <th scope="row">{{ $pData->id }}</th>
+                                                    <td>{{ $pData->file_name }}</td>
+                                                    <td>{{ $pData->submitted_by }}</td>
+                                                    <td>{{ $pData->created_at }}</td>
+                                                    <td>{{ substr($pData->file_path, 16) }}</td>
+                                                    <td>
+                                                        {{-- Delete --}}
+                                                        <form action="{{ URL::route('delete_permission_data', $pData->id) }}" method="POST" style="display: inline;">
+                                                            @csrf
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                                        </form>
 
-                                                    {{-- Accept --}}
-                                                    <form action="{{ URL::route('accept_permission_data', $pData->id) }}" method="POST" style="display: inline;">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-clipboard-check"></i></button>
-                                                    </form>
+                                                        {{-- Accept --}}
+                                                        <form action="{{ URL::route('accept_permission_data', $pData->id) }}" method="POST" style="display: inline;">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-clipboard-check"></i></button>
+                                                        </form>
 
-                                                    {{-- Preview --}}
-                                                    <form action="{{ URL::route('show_permission_data', $pData->id) }}" method="GET" style="display: inline;">
-                                                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                                        {{-- Preview --}}
+                                                        <form action="{{ URL::route('show_permission_data', $pData->id) }}" method="GET" style="display: inline;">
+                                                            <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     @endif
                                 @endif
