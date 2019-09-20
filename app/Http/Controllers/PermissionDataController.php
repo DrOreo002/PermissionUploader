@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\PermissionData;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class PermissionDataController extends Controller
 {
@@ -31,14 +34,11 @@ class PermissionDataController extends Controller
 
 	public function index_view($id) {
 	    $pData = PermissionData::find($id);
-	    if (!$pData->exists) {
-	        return view('admins.view')->with([
-	            'message', 'Cannot find the data!'
-            ]);
+	    if ($pData == null) {
+	        return view('admins.view')->with('error', 'Cannot find the data!');
         }
-		return view('admins.view')->with([
-		    'pData' => $pData
-        ]);
+	    $fileContent = Storage::get($pData->file_path);
+		return view('admins.view')->with('pData', $pData)->with('fileContent', $fileContent);
 	}
 
 	public function index_list() {

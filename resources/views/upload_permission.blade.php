@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h1 class="mb-0">Upload your permission</h1>
-                        <p class="text-muted">We only accept text based file</p>
+                        <p class="text-muted">We only accept text based file. Also text file cannot be empty!</p>
                         <hr>
 
                         @if(count($errors) > 0)
