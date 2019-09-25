@@ -27,7 +27,7 @@ class UniversalApiController extends Controller
      */
     public function api_download($id) {
         $pData = PermissionData::find($id);
-        if ($pData == null) return "Cannot find data with the id of $id";
+        if ($pData == null) return \Response::json(["error" => "Cannot find file with the id of $id"]);
         return \Storage::download($pData->file_path);
     }
 }

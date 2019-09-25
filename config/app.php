@@ -228,4 +228,8 @@ return [
 
     ],
 
+    'custom' => [
+        "is_auth_enabled" => false,
+        "app_info" => 'PermissionUploader v1.0 by DrOreo002'
+    ],
 ];
