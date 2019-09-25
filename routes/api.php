@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,9 +11,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/download/{id}', function($id) {
-    echo "Downloading " . $id;
-});
+Route::get('/download/{id}', 'UniversalApiController@api_download');
 
 Route::get('/list', 'UniversalApiController@api_list');
 
