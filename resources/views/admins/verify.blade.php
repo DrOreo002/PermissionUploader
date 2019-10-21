@@ -36,7 +36,7 @@
                                                     <td>{{ $pData->submitted_by }}</td>
                                                     <td>{{ $pData->created_at }}</td>
                                                     <td>{{ substr($pData->file_path, 16) }}</td>
-                                                    <td>
+                                                    <td width="15%">
                                                         {{-- Delete --}}
                                                         <form action="{{ URL::route('delete_permission_data', $pData->id) }}" method="POST" style="display: inline;">
                                                             @csrf
